@@ -32,7 +32,7 @@ public class SizeDeltaGauge : MonoBehaviour
 	}
 
 	CancellationTokenSource cancellation = new CancellationTokenSource();
-	public void SetGauge(int value, bool animation = false)
+	public async void SetGauge(int value, bool animation = false)
 	{
 		var amount = (float)value / maxCount;
 		if (gauge != null)
@@ -43,7 +43,7 @@ public class SizeDeltaGauge : MonoBehaviour
 			{
 				if(cancellation != null)cancellation.Cancel();
 				cancellation = new CancellationTokenSource();
-				DemoFillAnim(gauge.rectTransform, target);
+				await DemoFillAnim(gauge.rectTransform, target);
 			}
 			else
 			{
@@ -62,7 +62,7 @@ public class SizeDeltaGauge : MonoBehaviour
 		Vector2 startDelta = target.sizeDelta;
 		while(t < time)
 		{
-			if(cancellation.Token.CanBeCanceled) break;
+			if(cancellation.Token.IsCancellationRequested) break;
 
 			target.sizeDelta = Vector2.Lerp(startDelta, targetDelta, t / time);
 			t += Time.deltaTime;
