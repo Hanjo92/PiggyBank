@@ -30,24 +30,30 @@ public class TestUIGroup : MonoBehaviour
 			await PiggyBankManager.Instance.SetCurrentDataValue(0);
 		});
 
-
-		DemoWallet.Instance.onChangeMoney += (t, c) =>
-		{
-			switch(t)
-			{
-				case DemoBankType.Coin:
-				coinText.text = c.ToString();
-				break;
-				case DemoBankType.Diamond:
-				diaText.text = c.ToString();
-				break;
-				case DemoBankType.Ticket: 
-				ticketText.text = c.ToString(); 
-				break;
-			}
-		};
+		DemoWallet.Instance.onChangeMoney += OnChangeMoney;
 		coinText.text = DemoWallet.Instance.GetCoinCount().ToString();
 		diaText.text = DemoWallet.Instance.GetDiamondCount().ToString();
 		ticketText.text = DemoWallet.Instance.GetTicketCount().ToString();
+	}
+
+	private void OnDestroy()
+	{
+		DemoWallet.Instance.onChangeMoney -= OnChangeMoney;
+	}
+
+	private void OnChangeMoney(DemoBankType bankType, int count)
+	{
+		switch(bankType)
+		{
+			case DemoBankType.Coin:
+			coinText.text = bankType.ToString();
+			break;
+			case DemoBankType.Diamond:
+			diaText.text = bankType.ToString();
+			break;
+			case DemoBankType.Ticket:
+			ticketText.text = bankType.ToString();
+			break;
+		}
 	}
 }
