@@ -2,6 +2,8 @@
 Piggy Bank Demo // Project : Unity 2021.3.18f1
 캐주얼 게임에 자주 사용되는 저금통 기능을 위한 데모
 
+[Post link](https://seunghus.tistory.com/123)
+
 ![image](https://github.com/Hanjo92/PiggyBank/assets/26320361/eda03325-b447-40c6-b2ec-fbda022d9c1b)
 
 - 매니저를 통한 저금 및 구매
